@@ -18,9 +18,6 @@ jobs:
       - name: rover publish
         uses: ./
         with:
-          args: |
-            subgraph publish ${{ secrets.APOLLO_GRAPH_ID }}@current \
-            --name products --schema ./products.graphql \
-            --routing-url http://products.prod.svc.cluster.local:4001/graphql
+          args: subgraph publish ${{ secrets.APOLLO_GRAPH_ID }}@current --name products --schema ./products.graphql
         env:
           APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
