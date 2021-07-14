@@ -1,10 +1,13 @@
 {
   "scripts": {
-    "web": "node server.js"
+    "web": "pm2 start server.js"
   },
   "dependencies": {
     "@apollo/federation": "^0.26.0",
     "apollo-server": "^3.0.0",
     "graphql": "^15.5.1"
+  },
+  "devDependencies": {
+    "pm2": "^5.1.0"
   }
 }
