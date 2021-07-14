@@ -9,9 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-      - run: yarn install
-      - run: yarn web
+      - run: docker build -t pm2 .
+      - uses: addnab/docker-run-action@v3
+        with:
+          image: pm2
       - name: rover introspect
         uses: ./
         with:
