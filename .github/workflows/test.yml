@@ -1,6 +1,21 @@
 name: Test
 on: [push, pull_request]
 jobs:
+  introspect:
+    defaults:
+      run:
+        shell: bash
+        working-directory: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: yarn install
+      - run: yarn web
+      - name: rover introspect
+        uses: ./
+        with:
+          args: rover subgraph introspect http://localhost:3000/
   fetch:
     runs-on: ubuntu-latest
     steps:
@@ -18,6 +33,6 @@ jobs:
       - name: rover publish
         uses: ./
         with:
-          args: subgraph publish rover-actions@current --name products --schema ./products.graphql
+          args: subgraph publish rover-actions@current --name products --schema ./test/products.graphql
         env:
           APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
