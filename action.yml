@@ -1,0 +1,8 @@
+name: 'Apollo Rover CLI Setup'
+description: 'Wraps the Rover CLI to enable Rover commands to interact with Apollo Studio.'
+branding:
+  icon: 'share-2'  
+  color: 'blue'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
