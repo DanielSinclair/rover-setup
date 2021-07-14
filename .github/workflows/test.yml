@@ -1,0 +1,12 @@
+name: Test Fetch
+on: [push, pull_request]
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+    - name: rover fetch
+      uses: ./
+      with:
+        args: subgraph fetch ${{ secrets.APOLLO_GRAPH_ID }}@current --name ${{ secrets.APOLLO_SUBGRAPH_NAME }}
+      env:
+        APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
