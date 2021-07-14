@@ -15,7 +15,7 @@ jobs:
       - name: rover introspect
         uses: ./
         with:
-          args: rover subgraph introspect http://localhost:3000/
+          args: subgraph introspect http://localhost:3000/
   fetch:
     runs-on: ubuntu-latest
     steps:
