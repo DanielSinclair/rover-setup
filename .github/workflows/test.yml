@@ -4,21 +4,23 @@ jobs:
   fetch:
     runs-on: ubuntu-latest
     steps:
-    - name: rover fetch
-      uses: ./
-      with:
-        args: subgraph fetch ${{ secrets.APOLLO_GRAPH_ID }}@current --name ${{ secrets.APOLLO_SUBGRAPH_NAME }}
-      env:
-        APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
+      - uses: actions/checkout@v2
+      - name: rover fetch
+        uses: ./
+        with:
+          args: subgraph fetch ${{ secrets.APOLLO_GRAPH_ID }}@current --name ${{ secrets.APOLLO_SUBGRAPH_NAME }}
+        env:
+          APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
   push:
     runs-on: ubuntu-latest
     steps:
-    - name: rover publish
-      uses: ./
-      with:
-        args: |
-          subgraph publish ${{ secrets.APOLLO_GRAPH_ID }}@current \
-          --name products --schema ./products.graphql \
-          --routing-url http://products.prod.svc.cluster.local:4001/graphql
-      env:
-        APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
+      - uses: actions/checkout@v2
+      - name: rover publish
+        uses: ./
+        with:
+          args: |
+            subgraph publish ${{ secrets.APOLLO_GRAPH_ID }}@current \
+            --name products --schema ./products.graphql \
+            --routing-url http://products.prod.svc.cluster.local:4001/graphql
+        env:
+          APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
