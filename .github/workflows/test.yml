@@ -10,9 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: docker build -t pm2 .
-      - uses: addnab/docker-run-action@v3
-        with:
-          image: pm2
+      - run: docker run pm2 &
       - run: |
           sleep 5
           if curl http://localhost:3000/
