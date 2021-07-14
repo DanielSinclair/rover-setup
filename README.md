@@ -9,7 +9,7 @@ jobs:
     - name: rover fetch
       uses: danielsinclair/rover-setup@v1
       with:
-        args: subgraph fetch ${{ secrets.APOLLO_GRAPH_ID }}@current --name ${{ secrets.APOLLO_SUBGRAPH_NAME }}
+        args: subgraph fetch rover-actions@current --name products
       env:
         APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
 ```
