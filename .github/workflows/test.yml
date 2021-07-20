@@ -1,20 +1,6 @@
 name: Test
 on: [push, pull_request]
 jobs:
-  introspect:
-    defaults:
-      run:
-        shell: bash
-    runs-on: ubuntu-latest
-    services:
-      apollo:
-        image: danielsinclair/apollo-example
-    steps:
-      - uses: actions/checkout@v2
-      - name: rover introspect
-        uses: ./
-        with:
-          args: subgraph introspect http://apollo:3000/
   fetch:
     runs-on: ubuntu-latest
     steps:
@@ -25,7 +11,19 @@ jobs:
           args: subgraph fetch rover-actions@current --name products
         env:
           APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
+  introspect:
+    runs-on: ubuntu-latest
+    services:
+      apollo:
+        image: danielsinclair/apollo-example
+    steps:
+      - uses: actions/checkout@v2
+      - name: rover introspect
+        uses: ./
+        with:
+          args: subgraph introspect http://apollo:3000/ > products.graphql
   push:
+    needs: introspect
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
