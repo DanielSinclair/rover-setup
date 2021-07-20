@@ -5,11 +5,10 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: test
     runs-on: ubuntu-latest
     services:
       apollo:
-        image: ./
+        image: DanielSinclair/apollo-example
     steps:
       - uses: actions/checkout@v2
       - name: rover introspect
@@ -33,6 +32,6 @@ jobs:
       - name: rover publish
         uses: ./
         with:
-          args: subgraph publish rover-actions@current --name products --schema ./test/products.graphql
+          args: subgraph publish rover-actions@current --name products --schema ./products.graphql
         env:
           APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
