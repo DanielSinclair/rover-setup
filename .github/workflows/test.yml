@@ -7,20 +7,15 @@ jobs:
         shell: bash
         working-directory: test
     runs-on: ubuntu-latest
+    services:
+      apollo:
+        image: .
     steps:
       - uses: actions/checkout@v2
-      - run: docker ps
-      - run: docker build -t pm2 .
-      - run: docker run -d -p 3000:3000 --name apollo-server pm2
-      - run: |
-          if docker run --network container:apollo-server appropriate/curl -s --retry 10 --retry-connrefused http://localhost:3000/
-          then echo "server reachable"
-          else >&2 echo "server unreachable"
-          fi
       - name: rover introspect
         uses: ./
         with:
-          args: subgraph introspect http://localhost:3000/
+          args: subgraph introspect http://apollo:3000/
   fetch:
     runs-on: ubuntu-latest
     steps:
