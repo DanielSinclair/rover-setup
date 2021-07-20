@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: docker ps
       - run: docker build -t pm2 .
       - run: docker run -d -p 3000:3000 --name apollo-server pm2
       - run: |
