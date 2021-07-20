@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: docker build -t pm2 .
-      - run: docker run -d -p 3000:3000 pm2 --name apollo-server
+      - run: docker run -d -p 3000:3000 --name apollo-server pm2
       - run: |
           if docker run --network container:apollo-server appropriate/curl -s --retry 10 --retry-connrefused http://localhost:3000/
           then echo "server reachable"
