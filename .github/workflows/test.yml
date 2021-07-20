@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       apollo:
-        image: DanielSinclair/apollo-example
+        image: danielsinclair/apollo-example
     steps:
       - uses: actions/checkout@v2
       - name: rover introspect
